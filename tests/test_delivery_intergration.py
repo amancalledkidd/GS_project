@@ -51,6 +51,7 @@ def test_select_dish():
     menu.add(dish_3)
     assert menu.select(dish_1) == dish_1
 
+
 """
 select dishes for order
 use list order
@@ -112,7 +113,44 @@ def test_remove_order_dish():
     my_order.remove_dish(dish_1)
     assert my_order.list_order() == [dish_2]
 
+"""
+selct same dish multiple times
+Returns list with same dishes on it
+"""
 
+
+def test_select_same_dish_mutiple_times():
+    menu = Menu()
+    my_order = Order(menu)
+    dish_1 = Dish('Chips', 0.99)
+    dish_2 = Dish('Rice', 1.50)
+    dish_3 = Dish('Pasta', 1.20)
+    menu.add(dish_1)
+    menu.add(dish_2)
+    menu.add(dish_3)
+    my_order.select_dish(dish_1, 3)
+    assert my_order.list_order() == [dish_1, dish_1, dish_1]
+
+
+"""
+Make order 
+add items to order
+return itemised reciept
+"""
+
+def test_select_get_reciept():
+    menu = Menu()
+    my_order = Order(menu)
+    dish_1 = Dish('Chips', 0.99)
+    dish_2 = Dish('Rice', 1.50)
+    dish_3 = Dish('Pasta', 1.20)
+    menu.add(dish_1)
+    menu.add(dish_2)
+    menu.add(dish_3)
+    my_order.select_dish(dish_1, 3)
+    my_order.select_dish(dish_2, 4)
+    my_order.select_dish(dish_3)
+    assert my_order.get_order_reciept() == "Order: \nChips: £0.99 \nChips: £0.99 \nChips: £0.99 \nRice: £1.50 \nRice: £1.50 \nRice: £1.50 \nRice: £1.50 \nPasta: £1.20 \nTotal: £10.17 \n"
 
 
 
@@ -132,6 +170,7 @@ def test_formater_get_order_info():
     menu.add(dish_3)
     my_order.select_dish(dish_2)
     my_order.select_dish(dish_1)
-    my_info = CustomerInfo('Kumani', "123 road", '07946464836')
-    formatter = OrderFormatter(my_order, my_info)
-    assert formatter.get_order_info() == "Order: \nRice: £1.50 \nChips: £0.99 \nTotal: £2.49 \nName: Kumani \nAddress: 123 road \nPhone Number: 07946464836 \nNote:  \n"
+    my_order_confirmation = OrderConfirmation(my_order)
+    my_order_confirmation.send_order_confirmation()
+    my_order.make_order()
+    assert my_order.complete == True

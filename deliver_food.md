@@ -25,6 +25,11 @@ I would like to receive a text such as "Thank you! Your order was placed and wil
 
 ```python
 
+# Have makeorder call order confirmation
+# Add quantity option to add
+# Possibly oreder list , Itemise???
+# Time api for order confirmation
+
 # Nouns
 Dishes
 Prices

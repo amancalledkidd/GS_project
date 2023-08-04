@@ -11,3 +11,7 @@ class OrderFormatter():
         order_info += f'{self.customer_info.format()} \n'
         order_info += f'Note: {self.order.note} \n'
         return order_info
+    
+    def reciept(self):
+        if self.order.complete:
+            return self.get_order_info() 
